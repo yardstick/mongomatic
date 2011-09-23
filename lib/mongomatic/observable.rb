@@ -8,7 +8,7 @@ module Mongomatic
       self.class.observers.each do |observer|
         @observer_cache ||= {}
         unless observer_klass = @observer_cache[observer]
-          @observer_cache[observer] = observer_klass = Object.const_get(observer) if Object.const_defined?(observer)
+          @observer_cache[observer] = observer_klass = observer.to_s.constantize
         end
         
         if observer_klass
